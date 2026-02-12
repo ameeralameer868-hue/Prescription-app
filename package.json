@@ -1,0 +1,38 @@
+{
+  "name": "prescription-app",
+  "version": "1.0.0",
+  "description": "MediCare Pro - Prescription Management App",
+  "main": "index.js",
+  "scripts": {
+    "build": "cordova build android",
+    "build-release": "cordova build android --release",
+    "android": "cordova run android",
+    "emulator": "cordova emulate android"
+  },
+  "keywords": ["prescription", "medical", "healthcare"],
+  "author": "MediCare Team",
+  "license": "MIT",
+  "dependencies": {
+    "cordova-android": "^12.0.0",
+    "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-splashscreen": "^6.0.2",
+    "cordova-plugin-statusbar": "^3.0.0",
+    "cordova-plugin-whitelist": "^1.3.5",
+    "cordova-sqlite-storage": "^6.1.0"
+  },
+  "devDependencies": {
+    "cordova": "^12.0.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-sqlite-storage": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}
