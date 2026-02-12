@@ -1,0 +1,48 @@
+name: فك ضغط prescription.zip
+
+on:
+  push:
+    paths:
+      - 'prescription.zip'
+      - '**.zip'
+  workflow_dispatch:  # يسمح بتشغيلها يدوياً
+
+jobs:
+  unzip-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: نسخ المستودع
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: تثبيت unzip
+      run: |
+        sudo apt update
+        sudo apt install unzip -y
+    
+    - name: فك ضغط الملف
+      run: |
+        # تأكد من وجود الملف
+        if [ -f "prescription.zip" ]; then
+          echo "✅ تم العثور على prescription.zip"
+          unzip -o prescription.zip
+          echo "✅ تم فك الضغط بنجاح"
+        else
+          echo "❌ الملف prescription.zip غير موجود!"
+          exit 1
+        fi
+    
+    - name: حذف الملف المضغوط (اختياري)
+      run: |
+        rm -f prescription.zip
+        echo "✅ تم حذف الملف المضغوط"
+    
+    - name: رفع التغييرات
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add .
+        git diff --quiet && git diff --staged --quiet || git commit -m "فك ضغط prescription.zip تلقائياً"
+        git push
